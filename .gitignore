@@ -1,0 +1,8 @@
+node_modules
+public/media/*
+ffmpeg
+<<<<<<< HEAD
+*.swp
+=======
+npm-debug.log
+>>>>>>> 85aaf386a7ae1b7ad9f4447ab62910de25f30c91

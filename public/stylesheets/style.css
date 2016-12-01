@@ -1,0 +1,86 @@
+#nav ul {
+  list-style: none;
+}
+
+#nav li {
+  margin: 0;
+  float: left;
+  diaplay: block;
+  width: auto;
+}
+
+#nav li a {
+  padding: 10px;
+  margin: 0;
+  diaplay: inline;
+  width: auto;
+  color: #D7D493;
+  background: #000;
+  text-decoration: none;
+  border-right: 1px solid #fff;
+}
+
+#nav li a:hover {
+  color: #000;
+  background: #D7D493;
+}
+
+#nav li ul li{
+  float:none;
+  padding: 11px;
+  margin-left: -12px;
+}
+
+#nav li ul li a{
+  border-bottom:1px solid #fff;
+  border-right:none;
+}
+#nav ul {
+  list-style: none;
+}
+
+#nav li {
+  margin: 0;
+  float: left;
+  diaplay: block;
+  width: auto;
+}
+
+#nav li a {
+  padding: 10px;
+  margin: 0;
+  diaplay: inline;
+  width: auto;
+  color: #D7D493;
+  background: #000;
+  text-decoration: none;
+  border-right: 1px solid #fff;
+}
+
+#nav li a:hover {
+  color: #000;
+  background: #D7D493;
+}
+
+#nav li ul li{
+  float:none;
+  padding: 11px;
+  margin-left: -12px;
+}
+
+#nav li ul li a{
+  border-bottom:1px solid #fff;
+  border-right:none;
+}
+
+
+div.blog-content {
+    position:relative;
+    width: 100%;
+    padding: 0 10px;
+    z-index: 200;
+    font: 160% bold;
+    background:#ccc;
+}
+
+

@@ -48,9 +48,12 @@ var OverdaysField = React.createClass({
 });
 
 var InfoForm = React.createClass({
+	handleSubmit:function(e){
+		e.preventDefault();
+	},
 	render:function(){
 		return (
-			<form role="form" method="post"  action="/info">
+			<form role="form" method="post"  action="/info" onSubmit={this.handleSubmit}>
 			<TitleField />
 			<ContentField />
 			<OverdaysField />

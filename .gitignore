@@ -1,6 +1,7 @@
 node_modules
 public/media/*
 ffmpeg
+public/javascripts/build/*
 <<<<<<< HEAD
 *.swp
 =======

@@ -98,7 +98,18 @@ var InfoView = React.createClass({displayName: "InfoView",
 });
 
 
+var InfoList = React.createClass({displayName: "InfoList",
+	render:function(){
+		return (
+		React.createElement("ul", null, 
+			this.props.data.map(function(info){
+				return React.createElement("li", null, React.createElement("a", {href: ""}, info.title), "-", React.createElement("i", null, info.createDate));
+			})
+		)
+		);
+	}
+});
 ReactDOM.render(React.createElement(Search, null), document.getElementById('header'));
-ReactDOM.render(React.createElement(InfoForm, null), document.getElementById('addinfo'));
-ReactDOM.render(React.createElement("div", null, React.createElement(InfoBar, null), React.createElement(InfoView, null)), document.getElementById('showinfo'));
+ReactDOM.render(React.createElement(InfoList, {data: [{title:'Hello',createDate:'2012-01-01'}]}), document.getElementById('addinfo'));
+//ReactDOM.render(<div><InfoBar /><InfoView /></div>, document.getElementById('showinfo'));
 

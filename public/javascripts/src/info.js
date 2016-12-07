@@ -121,4 +121,18 @@ var InfoBox = React.createClass({
 })
 ReactDOM.render(<Search />, document.getElementById('header'));
 ReactDOM.render(<InfoBox url="/info"/>, document.getElementById('infoBox'));
+var InfoList = React.createClass({
+	render:function(){
+		return (
+		<ul>
+			{this.props.data.map(function(info){
+				return <li><a href="">{info.title}</a>-<i>{info.createDate}</i></li>;
+			})}
+		</ul>
+		);
+	}
+});
+ReactDOM.render(<Search />, document.getElementById('header'));
+ReactDOM.render(<InfoList data={[{title:'Hello',createDate:'2012-01-01'}]} />, document.getElementById('addinfo'));
+//ReactDOM.render(<div><InfoBar /><InfoView /></div>, document.getElementById('showinfo'));
 

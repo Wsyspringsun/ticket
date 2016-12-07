@@ -11,52 +11,45 @@ var Search = React.createClass( {displayName: "Search",
   	}
 });
 
-var TitleField = React.createClass({displayName: "TitleField",
-	render: function(){
-		return (
-			React.createElement("div", {className: "form-group"}, 
-		  		React.createElement("label", {for: "title"}, "标题"), 
-		  		React.createElement("input", {type: "text", className: "form-control", id: "title", value: "中文", name: "title", 
-		  		placeholder: "标题,请少于200字符"})
-	    		)
-		);
-	}
-});
-
-var ContentField = React.createClass({displayName: "ContentField",
-	render: function(){
-		return (
-	   		React.createElement("div", {className: "form-group"}, 
-		  		React.createElement("label", {for: "content"}, "内容"), 
-		  		React.createElement("textarea", {type: "textarea", rows: "20", className: "form-control", id: "content", name: "content", placeholder: "填写内容,请少于2000字符"}, "中文"
-				)
-	    	)
-		);
-	}
-
-});
-
-var OverdaysField = React.createClass({displayName: "OverdaysField",
-	render: function(){
-		return (
-	    	React.createElement("div", {className: "form-group"}, 
-		  	React.createElement("label", {for: "offdays"}, "有效天数"), 
-		  	React.createElement("input", {type: "text", className: "form-control", value: "15", id: "offdays", name: "offdays"})
-	    	)
-		);
-	}
-});
-
 var InfoForm = React.createClass({displayName: "InfoForm",
 	handleSubmit:function(e){
 		e.preventDefault();
+		var title = this.refs.title.value.trim();
+		var content = this.refs.content.value.trim();
+		var offdays = this.refs.offdays.value.trim();
+
+		if(title =='' || content =='' || offdays =='' ){
+			return;	
+		}
+		this.props.onInfoSubmit({
+			title:title,
+			content:content,
+			offdays:offdays
+		});
+		this.refs.title.value = '';
+		this.refs.content.value = '';
+		this.refs.offdays.value = '';
+
 	},
 	render:function(){
 		return (
-			React.createElement("form", {role: "form", method: "post", action: "/info", onSubmit: this.handleSubmit}, 
-			React.createElement(TitleField, null), 
-			React.createElement(ContentField, null), 
-			React.createElement(OverdaysField, null), 
+			React.createElement("form", {role: "form", onSubmit: this.handleSubmit}, 
+			React.createElement("div", {className: "form-group"}, 
+		  		React.createElement("label", {htmlFor: "title"}, "标题"), 
+		  		React.createElement("input", {type: "text", className: "form-control", defaultValue: "中文", ref: "title", 
+		  		placeholder: "标题,请少于200字符"})
+	    	), 
+
+	   		React.createElement("div", {className: "form-group"}, 
+		  		React.createElement("label", {htmlFor: "content"}, "内容"), 
+		  		React.createElement("textarea", {type: "textarea", rows: "20", className: "form-control", id: "content", ref: "content", placeholder: "填写内容,请少于2000字符"}
+				)
+	    	), 
+
+	    	React.createElement("div", {className: "form-group"}, 
+		  		React.createElement("label", {htmlFor: "offdays"}, "有效天数"), 
+		  		React.createElement("input", {type: "text", className: "form-control", defaultValue: "15", id: "offdays", ref: "offdays"})
+	    	), 
 	    	React.createElement("input", {type: "submit", className: "btn", value: "发布"})
 	  		)
 
@@ -66,12 +59,18 @@ var InfoForm = React.createClass({displayName: "InfoForm",
 });
 
 var InfoBar = React.createClass({displayName: "InfoBar",
+	handleModify:function(e){
+		
+	},
+	handlerDel:function(e){
+		
+	},
 	render:function(){
 		return (
-						React.createElement("div", null, 
-		React.createElement("button", {className: "btn"}, "添加"), 
-		React.createElement("button", {className: "btn"}, "修改")
-						)
+			React.createElement("div", null, 
+				React.createElement("button", {onClick: this.handleModify, className: "btn"}, "修改"), 
+				React.createElement("button", {onClick: this.handlerDel, className: "btn"}, "删除")
+			)
 		)
 	}
 
@@ -80,17 +79,11 @@ var InfoView = React.createClass({displayName: "InfoView",
 	render:function(){
 		return (
       		React.createElement("div", {className: "row"}, 
-			  	React.createElement("h1", null, "Title"), 
+			  	React.createElement("h1", null, this.props.info.title), 
         		React.createElement("p", {className: "col-md-12"}, 
-					"培训内容：" + ' ' +
-					"1 前端技术：学习在网页上展示内容（例如淘宝网的商品信息），如何在网页上制作小游戏（例如贪吃蛇游戏），如何播放视频（例如优酷视频）" + ' ' +
-					"2 后端技术：学习搭建服务器处理网页的请求（例如处理购物订单），学习如何存储查询海量的数据（例如查询淘宝商品）" + ' ' +
-					"涉及技术 ：" + ' ' +
-					"HTML+CSS网页技术，javascript编程语言，Nodejs服务器平台，mysql数据库，HTTP网络协议，面向对象编程思想，数据库数据关系的设计" + ' ' +
-					"面向人群 ：" + ' ' +
-					"计算机专业学生，对编程技术有浓厚兴趣者"
+					this.props.info.content
         		), 
-				React.createElement("div", null, React.createElement("i", null, "2016-11-01"))
+				React.createElement("div", null, React.createElement("i", null, this.props.info.createDate, "-", this.props.info.overDate))
       		)
 		);
 	}
@@ -98,7 +91,34 @@ var InfoView = React.createClass({displayName: "InfoView",
 });
 
 
+var InfoBox = React.createClass({displayName: "InfoBox",
+	getInitialState:function(){
+		return {data:{}};
+	},
+	handleInfoSubmit:function(info){
+		var me = this;	
+		$.post(this.props.url,info,function(result){
+			console.log(result);
+			if(!result)
+				throw Error("server err:no result ;");
+			if(!result.ok){
+				alert("服务器维护中...");
+				return;
+			}
+
+			me.setState(result);
+		});
+	},
+	render:function(){
+		return (
+			React.createElement("div", {className: "container", id: "infoBox"}, 
+				React.createElement(InfoForm, {onInfoSubmit: this.handleInfoSubmit}), 
+				React.createElement(InfoBar, null), 
+				React.createElement(InfoView, {info: this.state.data})
+			)
+		)
+	}
+})
 ReactDOM.render(React.createElement(Search, null), document.getElementById('header'));
-ReactDOM.render(React.createElement(InfoForm, null), document.getElementById('addinfo'));
-ReactDOM.render(React.createElement("div", null, React.createElement(InfoBar, null), React.createElement(InfoView, null)), document.getElementById('showinfo'));
+ReactDOM.render(React.createElement(InfoBox, {url: "/info"}), document.getElementById('infoBox'));
 

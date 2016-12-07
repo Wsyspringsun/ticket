@@ -37,10 +37,10 @@ router.post('/', function(req, res, next) {
 	infoDb.create(info, function(err, sql) {
 		var json = {};
 		if (err) {
-			json.result = false;
+			json.ok = false;
 			json.data = err+'\nsql:'+sql;
 		} else {
-			json.result = true;
+			json.ok = true;
 			json.data = info;
 		}
 		res.json(json);
@@ -51,11 +51,11 @@ router.get('/read', function(req, res, next) {
 	infoDb.read(function(err, rows, sql) {
 		var json = {};
 		if (err) {
-			json.result = false;
+			json.ok = false;
 			console.log(err+'\nsql:'+sql);
 			json.data = 'system read err;';
 		} else {
-			json.result = true;
+			json.ok = true;
 			json.data = rows;
 		}
 

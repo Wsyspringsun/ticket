@@ -2,48 +2,18 @@
 <html>
 <head>
     <%include head.ejs %>
+    <%include scripts.ejs%>
 </head>
 <body>
-    <%include nav.ejs %>
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1></h1>
-        <p></p>
-	<!-- <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>--> 
-      </div>
-    </div>
+	<div id="app"></div>
+	<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2></h2>
-          <p></p>
-          <p></p>
-        </div>
-        <div class="col-md-4">
-          <h2></h2>
-          <p></p>
-          <p></p>
-       </div>
-        <div class="col-md-4">
-          <h2></h2>
-          <p></p>
-          <p></p>
-        </div>
-      </div>
-      <hr>
-
-      <footer>
-      <p>&copy; 源编码 <script>document.write(new Date().getFullYear());</script></p>
-      </footer>
-    </div>
-    <!-- /container -->
-
-    <%include scripts.ejs%>
-	<script>
-window.location.href = '/info/';
-	</script>
+	<script  src="/javascripts/build/ui.js"> </script>
+	<script  src="/javascripts/build/nav.js"> </script>
+	<script  src="/javascripts/build/web.js"> </script>
+	<script  src="/javascripts/build/info.js"> </script>
+	<script  src="/javascripts/build/index.js"> </script>
 </body>
 </html>

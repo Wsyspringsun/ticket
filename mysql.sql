@@ -13,3 +13,13 @@ delete from info;
 insert into info values('test','ipaji is published','this is a big date, my ipaji is published.Everybody can publish info on my ipaji',curdate(),curdate()+2);
 select * from info;
 update info set overDate = date_add(curdate(),interval 31 day);
+//创建会员表格
+create table if not exists  member(
+	id varchar(50) not null,
+	username varchar(50) not null,
+	password text not null,
+	createDate date,
+	primary key(id)
+);
+
+select * from member;

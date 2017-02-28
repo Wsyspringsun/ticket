@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%include head.ejs %>
+    <%include scripts.ejs%>
+</head>
+<body>
+	<div id="app"></div>
+    <%include footer.ejs%>
+    <script  src="/javascripts/build/index.js"> </script>
+</body>
+</html>

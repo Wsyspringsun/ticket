@@ -4,7 +4,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
 	<title><%= settings.title %></title>
-	<link rel="stylesheet" href="/stylesheets/index.css"/>
+	<link rel="stylesheet" href="/stylesheets/index.css">
 </head>
 <body>
 	<div class="login-top">
@@ -24,7 +24,7 @@
 				<img src="images/inside_09.png" alt="">
 				<input type="password" name="pwd" placeholder="请输入密码">
 			</li>
-			<li><input type="submit" value="登录" /></li>
+			<li><input type="submit" value="登录"  class="login"/></li>
 			<% 
 				locals.msgs.forEach(function(msg){
 			%>
@@ -38,7 +38,8 @@
 		</div>
 	</div>
 	<div class="index-bottom">©2017 蓝九天 山西蓝九天药业连锁有限公司电子商务分公司 版权所有 晋ICP备17008614号 </div>	
-<script type="text/javascript" src="/javascripts/jqeury.js"></script>
+</body>
+<script src="/javascripts/jquery.js"></script>
 <script>
 	$(function(){
 		$("input").focus(function(){
@@ -49,6 +50,4 @@
 		})
 	})
 </script>
-
-</body>
 </html>

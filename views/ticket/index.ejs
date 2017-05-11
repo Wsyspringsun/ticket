@@ -23,7 +23,7 @@
 				<a href="##" class="area_A">A区</a>
 				<a href="##" class="area_B">B区</a>
 				<a href="##" class="area_C">C区</a>
-				<a href="##" class="area_VIP active">VIP区</a>
+				<a href="##" class="area_VIP active">中区</a>
 			</div>
 			<div>	
 				<p>座位：</p>
@@ -48,58 +48,82 @@
 		
 		</div><!-- end sidebar-->
 
-		<div class='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main'>
+		<div class='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main set-map'>
 
-		<div id="main" class="area">
-			<h3>VIP区</h3>
-			<div id="area_VIP" class="demo">
-				<div class="passway">安全通道</div>
-				<div id="seat-map-vipl"></div>
-				<div class="passway">安全通道</div>
-				<div id="seat-map-vipr"></div>
-				<div class="passway">安全通道</div>
-			</div>
-		</div>
+<div id="main" class="area">
+	<h3>中心区域</h3>
+	<div id="area_VIP">
+		<ul id="seat-map-gba"></ul>
+		<ul class="passway">
+			<li style="">贵宾区</li>
+			<li style="">主宾区</li>
+			<li style="">嘉宾区</li>
+		</ul>
+		<ul id="seat-map-zxl">
+			<li id="seat-map-gbl"></li>
+			<li id="seat-map-zbl"></li>
+			<li id="seat-map-jbl"></li>
+		</ul>
+		<ul class="passway">
+			<li>贵宾区</li>
+			<li>主宾区</li>
+			<li>嘉宾区</li>
+		</ul>
+		<ul id="seat-map-zxr">
+			<li id="seat-map-gbr"></li>
+			<li id="seat-map-zbr"></li>
+			<li id="seat-map-jbr"></li>
+		</ul>
+		<ul class="passway">
+			<li style="padding:4px 0 5px 0;">贵宾区</li>
+			<li style="padding:130px 0;">主宾区</li>
+			<li style="padding:40px 0 45px 0;">嘉宾区</li>
+		</ul>
+		<ul id="seat-map-gbb"></ul>
+		<div style="clear:both;"></div>
+	</div>
+</div>
 
-		<div id="main_c" class="area">
-			<h3>C区</h3>
-			<div id="area_C" class="demo">
-				<h4>第一层</h4>
-				<div id="seat-map-cl"></div>
-				<div id="seat-map-cr"></div>
-				<div style="clear:both;"></div>
-				<h4>第二层</h4>
-				<div>
-					<div id="seat-map-clt"></div>
-					<div id="seat-map-crt"></div>
-				</div>
-			</div>
+<div id="main_c" class="area">
+	<h3>C区</h3>
+	<div id="area_C" class="demo">
+		<h4>嘉宾C区</h4>
+		<div id="seat-map-jbcl"></div>
+		<div id="seat-map-jbcr"></div>
+		<div style="clear:both;"></div>
+		<h4>普宾C区</h4>
+		<div>
+			<div id="seat-map-pbcl"></div>
+			<div id="seat-map-pbcr"></div>
 		</div>
-		<div id="main_a" class="area">
-			<h3>A区</h3>
-			<div id="area_A" class="demo">
-				<h4>第一层</h4>
-				<div id="seat-map-a1"></div>
-				<div style="clear:both;"></div>
-				<div>
-					<h4>第二层</h4>
-					<div id="seat-map-a2"></div>	
-				</div>
-			</div>
-		</div>
-		<div id="main_b" class="area">
-			<h3>B区</h3>
-			<div id="area_B" class="demo">
-				<h4>第一层</h4>
-				<div id="seat-map-b1"></div>
-				<div style="clear:both;"></div>
-				<div>
-					<h4>第二层</h4>
-					<div id="seat-map-b2"></div>	
-				</div>
-			</div>
-		</div>
+	</div>
+</div>
 
+<div id="main_a" class="area">
+	<h3>A区</h3>
+	<div id="area_A" class="demo">
+		<h4>嘉宾A区</h4>
+		<div id="seat-map-jba"></div>
+		<div style="clear:both;"></div>
+		<div>
+			<h4>普宾A区</h4>
+			<div id="seat-map-pba"></div>	
+		</div>
+	</div>
+</div>
+
+<div id="main_b" class="area">
+	<h3>B区</h3>
+	<div id="area_B" class="demo">
+		<h4>嘉宾B区</h4>
+		<div id="seat-map-jbb"></div>
+		<div style="clear:both;"></div>
+		<div>
+			<h4>普宾B区</h4>
+			<div id="seat-map-pbb"></div>	
+		</div>
+	</div>
+</div>
 		
 		</div><!-- end main-->
 	</div>
@@ -109,36 +133,14 @@
 <script type="text/javascript" src="/javascripts/jquery.seat-charts.min.js">
 </script>
 <script type="text/javascript">
-(function(e){
-	console.log(e.prototype.seatCharts);
-	e.prototype.seatCharts.getId = function(e,t,n){
-		console.log(this);
-		return 'aaa' + t + '_' + n;
-	};
-})(jQuery);
 
 $(function() {
 	var $cart = $('#selected-seats'), //座位区
 	$counter = $('#counter'), //票数
 	$total = $('#total'); //总计金额
-
-	var svipl = $('#seat-map-vipl').seatCharts({
-		map: [  //vip区左边座位图
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
+//贵宾区
+	$('#seat-map-gbl').seatCharts({
+		map: [ 
 		'aaaaaaaaaaaaaaaaaaaa',
 		'aaaaaaaaaaaaaaaaaaaa',
 		'aaaaaaaaaaaaaaaaaaaa'
@@ -147,13 +149,16 @@ $(function() {
 			top : false,
 			getLabel : function (character, row, column) {
 				return column;
+			},
+			getId : function(e,t,n) {
+				return "贵宾区_"+t+"_"+n;
 			}
 		},
 		click: function () { //点击事件
 			if (this.status() == 'available') { //可选座
-				$('<li>VIP区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
+				$('<li>贵宾区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
 					.attr('id', 'cart-item-'+this.settings.id)
-					.data('seatId','VIP区'+ this.settings.id)
+					.data('seatId', this.settings.id)
 					.prependTo($cart);		
 				return 'selected';
 			} else if (this.status() == 'selected') { //已选中
@@ -169,16 +174,48 @@ $(function() {
 		}
 	});
 	
-	var svipr = $('#seat-map-vipr').seatCharts({
-		map: [  //vip去右边座位图
+	$('#seat-map-gbr').seatCharts({
+		map: [ 
 		'aaaaaaaaaaaaaaaaaaaa',
 		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa'
+		],
+		naming : {
+			top : false,
+			getLabel : function (character, row, column) {
+				return column;
+			},
+			getId : function(e,t,n) {
+				return "贵宾区_"+t+"_"+n;
+			}
+		},
+		click: function () { //点击事件
+			console.log(this.settings)
+			if (this.status() == 'available') { //可选座
+				$('<li>贵宾区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
+					.attr('id', 'cart-item-'+this.settings.id)
+					.data('seatId', this.settings.id)
+					.prependTo($cart);		
+				return 'selected';
+			} else if (this.status() == 'selected') { //已选中
+					//删除已预订座位
+					$('#cart-item-'+this.settings.id).remove();
+					//可选座
+					return 'available';
+			} else if (this.status() == 'unavailable') { //已售出
+				return 'unavailable';
+			} else {
+				return this.style();
+			}
+		}
+	});
+	
+//主宾区
+    $('#seat-map-zbl').seatCharts({
+		map: [ 
+		'____________________',
+		'____________________',
+		'____________________',
 		'aaaaaaaaaaaaaaaaaaaa',
 		'aaaaaaaaaaaaaaaaaaaa',
 		'aaaaaaaaaaaaaaaaaaaa',
@@ -194,13 +231,16 @@ $(function() {
 			top : false,
 			getLabel : function (character, row, column) {
 				return column;
+			},
+			getId : function(e,t,n) {
+				return "主宾区_"+t+"_"+n;
 			}
 		},
 		click: function () { //点击事件
 			if (this.status() == 'available') { //可选座
-				$('<li>VIP区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
+				$('<li>主宾区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
 					.attr('id', 'cart-item-'+this.settings.id)
-					.data('seatId','VIP区'+ this.settings.id)
+					.data('seatId', this.settings.id)
 					.prependTo($cart);
 							
 				return 'selected';
@@ -217,8 +257,157 @@ $(function() {
 		}		
 	});
 
-	var sc1l = $('#seat-map-cl').seatCharts({
-		map: [  //C区第一层左边座位图
+	$('#seat-map-zbr').seatCharts({
+		map: [  //
+		'____________________',
+		'____________________',
+		'____________________',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa'
+		],
+		naming : {
+			top : false,
+			getLabel : function (character, row, column) {
+				return column;
+			},
+			getId : function(e,t,n) {
+				return "主宾区_"+t+"_"+n;
+			}
+		},
+		click: function () { //点击事件
+			if (this.status() == 'available') { //可选座
+				$('<li>主宾区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
+					.attr('id', 'cart-item-'+this.settings.id)
+					.data('seatId', this.settings.id)
+					.prependTo($cart);
+							
+				return 'selected';
+			} else if (this.status() == 'selected') { //已选中
+					//删除已预订座位
+					$('#cart-item-'+this.settings.id).remove();
+					//可选座
+					return 'available';
+			} else if (this.status() == 'unavailable') { //已售出
+				return 'unavailable';
+			} else {
+				return this.style();
+			}
+		}		
+	});
+
+//嘉宾区
+	$('#seat-map-jbl').seatCharts({
+		map: [ 
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa'
+		],
+		naming : {
+			top : false,
+			getLabel : function (character, row, column) {
+				return column;
+			},
+			getId : function(e,t,n) {
+				return "嘉宾区_"+t+"_"+n;
+			}
+		},
+		click: function () { //点击事件
+			if (this.status() == 'available') { //可选座
+				$('<li>嘉宾区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
+					.attr('id', 'cart-item-'+this.settings.id)
+					.data('seatId', this.settings.id)
+					.prependTo($cart);
+							
+				return 'selected';
+			} else if (this.status() == 'selected') { //已选中
+					//删除已预订座位
+					$('#cart-item-'+this.settings.id).remove();
+					//可选座
+					return 'available';
+			} else if (this.status() == 'unavailable') { //已售出
+				return 'unavailable';
+			} else {
+				return this.style();
+			}
+		}		
+	});
+
+	$('#seat-map-jbr').seatCharts({
+		map: [ 
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'____________________',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaa'
+		],
+		naming : {
+			top : false,
+			getLabel : function (character, row, column) {
+				return column;
+			},
+			getId : function(e,t,n) {
+				return "嘉宾区_"+t+"_"+n;
+			}
+		},
+		click: function () { //点击事件
+			if (this.status() == 'available') { //可选座
+				$('<li>嘉宾区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
+					.attr('id', 'cart-item-'+this.settings.id)
+					.data('seatId', this.settings.id)
+					.prependTo($cart);
+							
+				return 'selected';
+			} else if (this.status() == 'selected') { //已选中
+					//删除已预订座位
+					$('#cart-item-'+this.settings.id).remove();
+					//可选座
+					return 'available';
+			} else if (this.status() == 'unavailable') { //已售出
+				return 'unavailable';
+			} else {
+				return this.style();
+			}
+		}		
+	});
+//嘉宾C区
+	$('#seat-map-jbcl').seatCharts({
+		map: [
 		'___________________________________________________',
 		'___________________________________________________',
 		'___________________________________________________',
@@ -233,13 +422,16 @@ $(function() {
 			top : false,
 			getLabel : function (character, row, column) {
 				return column;
+			},
+			getId : function(e,t,n) {
+				return "嘉宾C区_"+t+"_"+n;
 			}
 		},
 		click: function () { //点击事件
 			if (this.status() == 'available') { //可选座
-				$('<li>C区第一层'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
+				$('<li>嘉宾C区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
 					.attr('id', 'cart-item-'+this.settings.id)
-					.data('seatId', 'C区第一层'+this.settings.id)
+					.data('seatId', this.settings.id)
 					.prependTo($cart);
 							
 				return 'selected';
@@ -256,8 +448,8 @@ $(function() {
 		}		
 	});
 
-	var sc1r = $('#seat-map-cr').seatCharts({
-		map: [  //C区第一层右边座位图
+	$('#seat-map-jbcr').seatCharts({
+		map: [ 
 		'___________________________________________________',
 		'___________________________________________________',
 		'___________________________________________________',
@@ -272,13 +464,16 @@ $(function() {
 			top : false,
 			getLabel : function (character, row, column) {
 				return column;
+			},
+			getId : function(e,t,n) {
+				return "嘉宾C区_"+t+"_"+n;
 			}
 		},
 		click: function () { //点击事件
 			if (this.status() == 'available') { //可选座
-				$('<li>C区第一层'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
+				$('<li>嘉宾C区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
 					.attr('id', 'cart-item-'+this.settings.id)
-					.data('seatId','C区第一层'+ this.settings.id)
+					.data('seatId', this.settings.id)
 					.prependTo($cart);
 							
 				return 'selected';
@@ -294,8 +489,10 @@ $(function() {
 			}
 		}		
 	});
-	var sc2l = $('#seat-map-clt').seatCharts({
-		map: [  //C区第二层左边座位图
+
+//普宾C区
+	$('#seat-map-pbcl').seatCharts({
+		map: [  
 		'___________________________________________________________',
 		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
 		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
@@ -313,13 +510,16 @@ $(function() {
 			top : false,
 			getLabel : function (character, row, column) {
 				return column;
+			},
+			getId : function(e,t,n) {
+				return "普宾C区_"+t+"_"+n;
 			}
 		},
 		click: function () { //点击事件
 			if (this.status() == 'available') { //可选座
-				$('<li>C区第二层'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
+				$('<li>普宾C区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
 					.attr('id', 'cart-item-'+this.settings.id)
-					.data('seatId','C区第二层'+ this.settings.id)
+					.data('seatId', this.settings.id)
 					.prependTo($cart);
 							
 				return 'selected';
@@ -336,9 +536,8 @@ $(function() {
 		}
 	});
 
-
-	var sc2r = $('#seat-map-crt').seatCharts({
-		map: [  //C区第二层右边座位图
+	$('#seat-map-pbcr').seatCharts({
+		map: [  
 		'_____________________________________________________',
 		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa__________',
 		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa__________',
@@ -356,13 +555,16 @@ $(function() {
 			top : false,
 			getLabel : function (character, row, column) {
 				return column;
+			},
+			getId : function(e,t,n) {
+				return "普宾C区_"+t+"_"+n;
 			}
 		},
 		click: function () { //点击事件
 			if (this.status() == 'available') { //可选座
-				$('<li>C区第二层'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
+				$('<li>普宾C区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
 					.attr('id', 'cart-item-'+this.settings.id)
-					.data('seatId', 'C区第二层'+this.settings.id)
+					.data('seatId', this.settings.id)
 					.prependTo($cart);
 							
 				return 'selected';
@@ -379,15 +581,57 @@ $(function() {
 		}
 	});
 
-	var sa1 = $('#seat-map-a1').seatCharts({
-		map: [  //座位图
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa____________________',
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+//贵宾A区
+	$('#seat-map-gba').seatCharts({
+		map: [  
+		'______________aaaaaaaaaaaaaa',
+		'______________aaaaaaaaaaaaaa',
+		'______________aaaaaaaaaaaaaa',
+		'______________aaaaaaaaaaaaaa',
+		'______________aaaaaaaaaaaaaa',
+		'______________aaaaaaaaaaaaaa',
+		'______________aaaaaaaaaaaaaa'
+		],
+		naming : {
+			top : false,
+			getLabel : function (character, row, column) {
+				return column;
+			},
+			getId : function(e,t,n) {
+				return "贵宾A区_"+t+"_"+n;
+			}
+		},
+		click: function () { //点击事件
+			if (this.status() == 'available') { //可选座
+				$('<li>贵宾A区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
+					.attr('id', 'cart-item-'+this.settings.id)
+					.data('seatId', this.settings.id)
+					.prependTo($cart);
+							
+				return 'selected';
+			} else if (this.status() == 'selected') { //已选中
+					//删除已预订座位
+					$('#cart-item-'+this.settings.id).remove();
+					//可选座
+					return 'available';
+			} else if (this.status() == 'unavailable') { //已售出
+				return 'unavailable';
+			} else {
+				return this.style();
+			}
+		}
+	});
+
+//嘉宾A区
+	$('#seat-map-jba').seatCharts({
+		map: [  
+		'____________________________aaaaaaaaaaaaaaaaaaaaaaaaaa____________________',
+		'____________________________aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+		'____________________________aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+		'____________________________aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+		'____________________________aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+		'____________________________aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+		'____________________________aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
 		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
 		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
 		],
@@ -395,13 +639,16 @@ $(function() {
 			top : false,
 			getLabel : function (character, row, column) {
 				return column;
+			},
+			getId : function(e,t,n) {
+				return "嘉宾A区_"+t+"_"+n;
 			}
 		},
 		click: function () { //点击事件
 			if (this.status() == 'available') { //可选座
-				$('<li>A区第一层'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
+				$('<li>嘉宾A区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
 					.attr('id', 'cart-item-'+this.settings.id)
-					.data('seatId','A区第一层'+ this.settings.id)
+					.data('seatId', this.settings.id)
 					.prependTo($cart);
 							
 				return 'selected';
@@ -418,8 +665,9 @@ $(function() {
 		}
 	});
 
-	var sa2 = $('#seat-map-a2').seatCharts({
-		map: [  //座位图
+// 普宾A区_区
+	$('#seat-map-pba').seatCharts({
+		map: [ 
 		'________________________________________________________________________________________________',
 		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
 		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
@@ -439,55 +687,14 @@ $(function() {
 			top : false,
 			getLabel : function (character, row, column) {
 				return column;
-			}
-		},
-		click: function () { //点击事件
-			if (this.status() == 'available') { //可选座
-				$('<li>A区第二层'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
-					.attr('id', 'cart-item-'+this.settings.id)
-					.data('seatId','A区第二层'+ this.settings.id)
-					.prependTo($cart);
-							
-				return 'selected';
-			} else if (this.status() == 'selected') { //已选中
-					//删除已预订座位
-					$('#cart-item-'+this.settings.id).remove();
-					//可选座
-					return 'available';
-			} else if (this.status() == 'unavailable') { //已售出
-				return 'unavailable';
-			} else {
-				return this.style();
-			}
-		}
-	});
-
-	var sb1 = $('#seat-map-b1').seatCharts({
-		map: [  //座位图
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa______________________',
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-		],
-		naming : {
-			top : false,
-			getLabel : function (character, row, column) {
-				return column;
 			},
-			getId:function(e,t,n){
-				return 'B区第一层_'+t+'_'+n;
+			getId : function(e,t,n) {
+				return "普宾A区_"+t+"_"+n;
 			}
-
 		},
 		click: function () { //点击事件
-console.log(this.settings);
 			if (this.status() == 'available') { //可选座
-				$('<li>B区第一层'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
+				$('<li>普宾A区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
 					.attr('id', 'cart-item-'+this.settings.id)
 					.data('seatId', this.settings.id)
 					.prependTo($cart);
@@ -506,8 +713,94 @@ console.log(this.settings);
 		}
 	});
 
- 	var sb2 = $('#seat-map-b2').seatCharts({
-		map: [  //座位图
+//贵宾B区
+	$('#seat-map-gbb').seatCharts({
+		map: [  
+		'aaaaaaaa',
+		'aaaaaaaa',
+		'aaaaaaaa',
+		'aaaaaaaa',
+		'aaaaaaaa',
+		'aaaaaaaa',
+		'aaaaaaaa',
+		'aaaaaaaa'
+		],
+		naming : {
+			top : false,
+			getLabel : function (character, row, column) {
+				return column;
+			},
+			getId : function(e,t,n) {
+				return "贵宾B区_"+t+"_"+n;
+			}
+		},
+		click: function () { //点击事件
+			if (this.status() == 'available') { //可选座
+				$('<li>贵宾B区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
+					.attr('id', 'cart-item-'+this.settings.id)
+					.data('seatId', this.settings.id)
+					.prependTo($cart);
+							
+				return 'selected';
+			} else if (this.status() == 'selected') { //已选中
+					//删除已预订座位
+					$('#cart-item-'+this.settings.id).remove();
+					//可选座
+					return 'available';
+			} else if (this.status() == 'unavailable') { //已售出
+				return 'unavailable';
+			} else {
+				return this.style();
+			}
+		}
+	});
+
+//嘉宾B区
+$('#seat-map-jbb').seatCharts({
+		map: [  
+		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa______________________',
+		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		],
+		naming : {
+			top : false,
+			getLabel : function (character, row, column) {
+				return column;
+			},
+			getId : function(e,t,n) {
+				return "嘉宾B区_"+t+"_"+n;
+			}
+		},
+		click: function () { //点击事件
+			if (this.status() == 'available') { //可选座
+				$('<li>嘉宾B区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
+					.attr('id', 'cart-item-'+this.settings.id)
+					.data('seatId', this.settings.id)
+					.prependTo($cart);
+							
+				return 'selected';
+			} else if (this.status() == 'selected') { //已选中
+					//删除已预订座位
+					$('#cart-item-'+this.settings.id).remove();
+					//可选座
+					return 'available';
+			} else if (this.status() == 'unavailable') { //已售出
+				return 'unavailable';
+			} else {
+				return this.style();
+			}
+		}
+	});
+
+//普宾B区
+$('#seat-map-pbb').seatCharts({
+		map: [  
 		'___________________________________________________________________________________________________________________',
 		'__________________________aaaaaaaaaaaaaaaaaaa',
 		'__________________________aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
@@ -529,13 +822,16 @@ console.log(this.settings);
 			top : false,
 			getLabel : function (character, row, column) {
 				return column;
+			},
+			getId : function(e,t,n) {
+				return "普宾B区_"+t+"_"+n;
 			}
 		},
 		click: function () { //点击事件
 			if (this.status() == 'available') { //可选座
-				$('<li>B区第二层'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
+				$('<li>普宾B区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
 					.attr('id', 'cart-item-'+this.settings.id)
-					.data('seatId','B区第二层'+ this.settings.id)
+					.data('seatId', this.settings.id)
 					.prependTo($cart);
 							
 				return 'selected';
@@ -551,6 +847,13 @@ console.log(this.settings);
 			}
 		}
 	});
+
+for(var i=0;i<=$(".seatCharts-row").length;i++){
+	if($(".seatCharts-row").eq(i).text().length<=2){
+		$(".seatCharts-row").eq(i).hide();
+}
+}
+	
 	// 切换区域	
 	$(".area_VIP").click(function(){
 		$(".pic-center a").removeClass("active");

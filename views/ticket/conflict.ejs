@@ -1,0 +1,16 @@
+<%include ../head.ejs %>
+<h1>冲突提示</h1>
+<form method="post" action='/ticket/create' id='frm'>
+<p>
+您要选择的座位 [<%= seatArr.join(',')%>]中
+[<%= blacks.join(',') %>]已经被选走,是否
+<%-enable.length>0 ?'<input type="submit" value="确定"/>选择座位'+
+ enable.join(',') + ',或者':'无法选择,请' %>
+<a href='/ticket/'>重新选择</a>
+</p>
+<input type='hidden' name='owner' value="<%=owner%>" ></input>
+<input type='hidden' name='ver'  value="<%=ver%>"></input>
+<input type='hidden' name='sels'  value="<%=enable.join(',') %>"></input>
+</form>
+</body>
+</html>

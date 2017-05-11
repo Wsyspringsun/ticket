@@ -1,4 +1,4 @@
-create database cms;
+create database ticket;
 //创建信息表格
 create table if not exists  info(
 	id varchar(50) not null,

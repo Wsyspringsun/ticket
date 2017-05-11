@@ -1,0 +1,115 @@
+<%include ../head.ejs %>
+<br/>
+<div class='container'>
+	<div class='row'>
+		<div class='col-sm-12  col-md-12  main'>
+
+
+		<%
+			var i,len=tickets.length;
+		%>
+			<div class="container">
+				<div>
+				<% 
+					locals.msgs.forEach(function(msg){
+				%>
+				<%= msg.type=='error'?'错误:'+msg.data:'' %>
+				<%  
+					});
+					locals.rmMsgs();
+				%>
+
+				</div>
+				<form id="frm">
+				<div class="btn-group form-inline"  role="group" aria-label="...">
+						<lable>场次：
+						<select class="form-control"  name="ver" >
+						<%
+						vers.forEach((ver)=>{
+						%>
+							<option value="<%= ver.id%>" <%= ver.id==verid?'selected=selected':null %> ><%= ver.title%></option>
+						<%
+						});
+						%>
+						</select></label>
+						<input id="btnlist"  class="btn btn-default" type="submit" name="btnChange" value="查询" />
+
+					<input type="submit" id="btnprint" class="btn btn-success" value="打印"/>
+				</div>
+				<table class="table">
+					<caption>
+					    第<%= paging.page%>页;共<%= paging.pages %>页
+					</caption>
+					<thead>
+						<tr>
+						<th>#</th>
+						<th>场次</th>
+						<th>座位</th>
+						</tr>
+					</thead>
+					<tbody>
+			<%
+				tickets.forEach(function(item,i){
+			%>
+						<tr <%= i%2 == 0?'class=info':''%>>
+						<td>
+		<div class="checkbox">
+		<label>
+						<input type="checkbox"  name="sels" value="<%= item.id%>"/><%= i+1%></label></div>
+						</td>
+						<td><%= item.title %></td>
+						<td><%= item.seat_id%></td>
+						</tr>
+			<% 
+				});
+			%>
+					</tbody>
+				</table>
+				</form>
+				<nav>
+				<ul class="pager">
+				<% if(paging.page > 1 && paging.pages > 0){%>
+				  <li class="previous">
+				    <a href="/ticket/list?page=1">&larr;&larr;首页</a>
+				  </li>
+
+				  <li class="previous">
+				    <a href="/ticket/list?page=<%=paging.page -1 %>">&larr; 上一页</a>
+				  </li>
+		<%} %>
+		<% if(paging.page < paging.pages && paging.pages > 1){%>
+				  <li class="next">
+				    <a href="/ticket/list?page=<%=paging.pages %>">尾页 &rarr;&rarr;</a>
+				  </li>
+
+				  <li class="next">
+				    <a href="/ticket/list?page=<%=paging.page + 1%>">下一页 &rarr;</a>
+				  </li>
+
+		<%} %>
+				</ul>
+				</nav>
+			
+			</div>	
+		</div>
+	</div>
+</div>
+<script>
+$(function(){
+	$('#btnlist').click(function(e){
+		$('#frm').attr({
+			method : 'post',
+			action :"/ticket/list"
+		});
+	});
+	$('#btnprint').click(function(e){
+		$('#frm').attr({
+			method : 'post',
+			action : '/ticket/print'
+		});
+	});
+});
+</script>
+
+</body>
+</html>

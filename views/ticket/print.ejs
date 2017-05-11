@@ -1,0 +1,27 @@
+<%include ../head.ejs %>
+	<div>
+	<%
+		var i,j,len = tickets.length;
+		for(i=0;i<len;i++){
+			var ticket = tickets[i];
+	%>
+
+		<p>
+			<h2><%=settings.title%></h2>
+			<h2>戏票入场券</h2>
+			<h1><%= ticket.seat_id%></h1>
+			<h2>入场时间:<%= '6月7日 15:30'%></h2>
+			<h2>凭票入场:<%= '盖章有效'%></h2>
+			<br/>
+			<h2>咨询电话:<%= '0386-6993562'%></h2>
+			<hr style="height:2px;border-top:solid 3px #000;"/>
+			<hr/>
+		</p>
+		
+	<%
+		}
+	%>
+
+	</div>
+	</body>
+</html>

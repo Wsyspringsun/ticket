@@ -37,7 +37,7 @@ var App = React.createClass({
 				<XBox isLogined = {stat} />
 			</div>
 			<div className="footer">
-				<p>&copy; 皓鑫有限公司&nbsp;{new Date().getFullYear()} </p>
+				<p>&copy; 蓝九天电商有限公司&nbsp;{new Date().getFullYear()} </p>
 			</div>
 		</div>
 		);

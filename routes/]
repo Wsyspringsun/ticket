@@ -1,0 +1,97 @@
+var du = require('date-utils');
+var db = require('../lib/db.js');
+var array = require('array');
+var val = 'hell'
+function t1(){
+	console.log('t1'+val);
+}
+exports.test = function(test) {
+	test.ok(true, 'never happen');
+	t1();
+
+	var arr1 = [11,12,13,14,15];
+	var arr2 = [1,2,11,13,4,5];
+
+//union
+var unionArr = [].concat(arr1);
+arr2.forEach(function(item){
+	if(unionArr.indexOf(item) >= 0){
+	}else{
+		unionArr[unionArr.length] = item;
+	}
+});
+console.log('union:',unionArr);
+//intersection
+var interSectionArr = [];
+arr2.forEach(function(item){
+	if(arr1.indexOf(item) >= 0){
+		interSectionArr.push(item);
+	}
+});
+console.log('intersection:',interSectionArr);
+//subtract
+var resultArr = array(arr1);
+var arr = resultArr.reject(function(item){
+	return arr2.indexOf(item) >= 0;
+});
+var arrAll = arr1.concat(arr2);
+arrAll = array(arrAll);
+console.log('sub:',arrAll.unique());
+
+console.log('sub:',arr.toArray());
+console.log('arr1:',arr1);
+console.log('arr2:',arr2);
+
+
+
+
+	test.done();
+
+	var mdl =  { owner: '1', ver: '1', sels: '' };
+	var strSeats = mdl.sels;
+	if(!strSeats || ''==strSeats){
+		console.log('没有选任何座位');
+		return ;
+	}
+
+	var sql_ins = "insert into ticket( `seat_id`, `owner_id`, `ver`)values ?";
+	var sql_sel = "select * from ticket t where t.ver=? and t.owner_id=? and t.seat_id in (?) ";
+	db.beginTransaction(function(err) {
+		if (err) { throw err; }
+
+		var values = [];
+		var strSeats = ['1','2','3'];
+		strSeats.forEach(function(seat_id){
+			values[values.length] = [seat_id,'1','1'];
+		});
+		//values = ['1','1','1'];
+		console.log('input :',values);
+		db.query(sql_ins, [values], function (error, results, fields) {
+			if (error) throw error;
+			console.log('output: ',results);
+
+			db.rollback((error) => {
+				if (error) throw error;
+
+				var selRet = db.query(sql_sel,['1','1',['1','2']],function(error,results){
+					console.log('result: ',results);
+					test.done();
+				});
+				console.log('selRet:',selRet.sql);
+			});
+
+		});
+
+
+	});
+	
+}
+exports.testDateUtils = function(test) {
+	var now = new Date();
+	var nextday = now.add({
+		days: 1
+	});
+	console.log(nextday.toFormat('YYYY-MM-DD'));
+	test.done();
+}
+

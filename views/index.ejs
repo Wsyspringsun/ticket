@@ -1,19 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-    <%include head.ejs %>
-    <%include scripts.ejs%>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<title><%= settings.title %></title>
+	<link rel="stylesheet" href="/stylesheets/index.css"/>
 </head>
 <body>
-	<div id="app"></div>
-	<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"></script>
-    <script type="text/javascript" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+	<div class="login-top">
+		<img src="images/logo.png" alt="">
+		<img src="images/lg_01.png" alt="" class="picture">
+	</div>	
+	<div id="login-bg">
+		<div id="login">
+		<form method="post" action="/login">
+		<ul>
+			<li><img src="images/logo.png" alt=""></li>
+			<li class="text">
+				<img src="images/inside_08.png" alt="">
+				<input type="text" name="uname" placeholder="请输入门店号">
+			</li>
+			<li class="text">
+				<img src="images/inside_09.png" alt="">
+				<input type="password" name="pwd" placeholder="请输入密码">
+			</li>
+			<li><input type="submit" value="登录" /></li>
+			<% 
+				locals.msgs.forEach(function(msg){
+			%>
+			<li><%= msg.type=='error'?'错误:'+msg.data:'' %></li>
+			<%  
+				});
+				locals.rmMsgs();
+			%>
+		</ul>
+		</form>
+		</div>
+	</div>
+	<div class="index-bottom">©2017 蓝九天 山西蓝九天药业连锁有限公司电子商务分公司 版权所有 晋ICP备17008614号 </div>	
+<script type="text/javascript" src="/javascripts/jqeury.js"></script>
+<script>
+	$(function(){
+		$("input").focus(function(){
+			$(this).parent().addClass("active");
+		})
+		$("input").blur(function(){
+			$(this).parent().removeClass("active");
+		})
+	})
+</script>
 
-	<script  src="/javascripts/build/ui.js"> </script>
-	<script  src="/javascripts/build/nav.js"> </script>
-	<script  src="/javascripts/build/web.js"> </script>
-	<script  src="/javascripts/build/info.js"> </script>
-	<script  src="/javascripts/build/index.js"> </script>
 </body>
 </html>

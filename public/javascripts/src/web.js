@@ -76,15 +76,15 @@ var WebBox = React.createClass({
 		this.setState(this.state);
 	},
 	readInfos:function(){
-		$.get('/info/read',function(result){
-			if(!result || !result.ok){
-				alert(window.SYS_ERR);
-				return;
-			}
-
-			this.state.infos = result.data;
-			this.toList();
-		}.bind(this));
+//		$.get('/info/read',function(result){
+//			if(!result || !result.ok){
+//				alert(window.SYS_ERR);
+//				return;
+//			}
+//
+//			this.state.infos = result.data;
+//			this.toList();
+//		}.bind(this));
 	},
 	render:function(){
 		var stat = this.state.stat;

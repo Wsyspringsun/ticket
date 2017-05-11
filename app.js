@@ -83,6 +83,12 @@ console.log('from db');
 });
 app.use('/ticket', ticket);
 
+app.use(()=>{
+	db.getConnection((err,connection)=>{
+		connection.release();
+	})
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	var err = new Error('Not Found');

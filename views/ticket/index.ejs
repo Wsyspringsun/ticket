@@ -1,5 +1,5 @@
 <%include ../head.ejs%>
-<form method="post" action='/ticket/create' id='frm'>
+<form  id='frm'>
 <div class='container'>
 	<div class='row'>
 		<div class='col-sm-3 col-md-2 sidebar'>
@@ -14,7 +14,7 @@
 				});
 				%>
 				</select>
-				<input  class="form-control"type="submit" name="btnChange" value="变更" />
+				<button  class="btn btn-default form-control" type="submit" name="btnChange" id="btnChange">变更</button>
 			</div>
 			<h2>座位图示意图</h2>
 			<div class="center">舞台</div>
@@ -139,7 +139,7 @@ $(function() {
 	$counter = $('#counter'), //票数
 	$total = $('#total'); //总计金额
 //贵宾区
-	$('#seat-map-gbl').seatCharts({
+	var sVip1 = $('#seat-map-gbl').seatCharts({
 		map: [ 
 		'aaaaaaaaaaaaaaaaaaaa',
 		'aaaaaaaaaaaaaaaaaaaa',
@@ -174,7 +174,7 @@ $(function() {
 		}
 	});
 	
-	$('#seat-map-gbr').seatCharts({
+	var sVip2 = $('#seat-map-gbr').seatCharts({
 		map: [ 
 		'aaaaaaaaaaaaaaaaaaaa',
 		'aaaaaaaaaaaaaaaaaaaa',
@@ -211,7 +211,7 @@ $(function() {
 	});
 	
 //主宾区
-    $('#seat-map-zbl').seatCharts({
+    var sVip3 = $('#seat-map-zbl').seatCharts({
 		map: [ 
 		'____________________',
 		'____________________',
@@ -257,7 +257,7 @@ $(function() {
 		}		
 	});
 
-	$('#seat-map-zbr').seatCharts({
+	var sVip4 = $('#seat-map-zbr').seatCharts({
 		map: [  //
 		'____________________',
 		'____________________',
@@ -304,7 +304,7 @@ $(function() {
 	});
 
 //嘉宾区
-	$('#seat-map-jbl').seatCharts({
+	var sc1 = $('#seat-map-jbl').seatCharts({
 		map: [ 
 		'____________________',
 		'____________________',
@@ -355,7 +355,7 @@ $(function() {
 		}		
 	});
 
-	$('#seat-map-jbr').seatCharts({
+	var sc2 = $('#seat-map-jbr').seatCharts({
 		map: [ 
 		'____________________',
 		'____________________',
@@ -406,7 +406,7 @@ $(function() {
 		}		
 	});
 //嘉宾C区
-	$('#seat-map-jbcl').seatCharts({
+	var sc3 = $('#seat-map-jbcl').seatCharts({
 		map: [
 		'___________________________________________________',
 		'___________________________________________________',
@@ -448,7 +448,7 @@ $(function() {
 		}		
 	});
 
-	$('#seat-map-jbcr').seatCharts({
+	var sc4 = $('#seat-map-jbcr').seatCharts({
 		map: [ 
 		'___________________________________________________',
 		'___________________________________________________',
@@ -491,7 +491,7 @@ $(function() {
 	});
 
 //普宾C区
-	$('#seat-map-pbcl').seatCharts({
+	var sc5 = $('#seat-map-pbcl').seatCharts({
 		map: [  
 		'___________________________________________________________',
 		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
@@ -536,7 +536,7 @@ $(function() {
 		}
 	});
 
-	$('#seat-map-pbcr').seatCharts({
+	var sc6 = $('#seat-map-pbcr').seatCharts({
 		map: [  
 		'_____________________________________________________',
 		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa__________',
@@ -582,7 +582,7 @@ $(function() {
 	});
 
 //贵宾A区
-	$('#seat-map-gba').seatCharts({
+	var sc7 = $('#seat-map-gba').seatCharts({
 		map: [  
 		'______________aaaaaaaaaaaaaa',
 		'______________aaaaaaaaaaaaaa',
@@ -623,7 +623,7 @@ $(function() {
 	});
 
 //嘉宾A区
-	$('#seat-map-jba').seatCharts({
+	var sc8 = $('#seat-map-jba').seatCharts({
 		map: [  
 		'____________________________aaaaaaaaaaaaaaaaaaaaaaaaaa____________________',
 		'____________________________aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
@@ -666,7 +666,7 @@ $(function() {
 	});
 
 // 普宾A区_区
-	$('#seat-map-pba').seatCharts({
+	var sc9 = $('#seat-map-pba').seatCharts({
 		map: [ 
 		'________________________________________________________________________________________________',
 		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
@@ -714,7 +714,7 @@ $(function() {
 	});
 
 //贵宾B区
-	$('#seat-map-gbb').seatCharts({
+	var sc10 = $('#seat-map-gbb').seatCharts({
 		map: [  
 		'aaaaaaaa',
 		'aaaaaaaa',
@@ -756,7 +756,7 @@ $(function() {
 	});
 
 //嘉宾B区
-$('#seat-map-jbb').seatCharts({
+var sc11 = $('#seat-map-jbb').seatCharts({
 		map: [  
 		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa______________________',
 		'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
@@ -799,7 +799,7 @@ $('#seat-map-jbb').seatCharts({
 	});
 
 //普宾B区
-$('#seat-map-pbb').seatCharts({
+var sc12 = $('#seat-map-pbb').seatCharts({
 		map: [  
 		'___________________________________________________________________________________________________________________',
 		'__________________________aaaaaaaaaaaaaaaaaaa',
@@ -886,12 +886,19 @@ for(var i=0;i<=$(".seatCharts-row").length;i++){
 
 	//已售出的座位
 	var disables = <%-disables.length>0?'[' + disables + ']':'[]' %>;
-	var slist = [svipl , svipr, sc1l , sc1r , sc2l , sc2r , sa1 , sa2 , sb1 , sb2 ];
+	var slist = [sVip1,sVip2,sVip3,sVip4,sc1,sc2,sc3,sc4,sc5,sc6,sc7,sc8,sc9,sc10,sc11,sc12];
 	$.each(slist,function(idx,item){
 		item.get(disables).status('unavailable');
 	});
 
 
+	//变更
+	$('#btnChange').click(function(e){
+		$('#frm').attr({
+			method:"get" ,
+			action:'/ticket/'
+		});
+	});
 	//提交
 	$('#btnSure').click(function(e){
 		var sels = [];
@@ -905,8 +912,14 @@ console.log(sels);
 			return false;
 		}
 		$('input[name="sels"]').val(sels);
+
+		$('#frm').attr({
+			method:"post" ,
+			action:'/ticket/create'
+		});
 	});
 
+	
 
 });
 

@@ -1,0 +1,24 @@
+<nav>
+<ul class="pager">
+<% if(paging.page > 1 && paging.pages > 0){%>
+  <li class="previous">
+    <a href="/ticket/list?page=1">&larr;&larr;首页</a>
+  </li>
+
+  <li class="previous">
+    <a href="/ticket/list?page=<%=paging.page -1 %>">&larr; 上一页</a>
+  </li>
+<%} %>
+<% if(paging.page < paging.pages && paging.pages > 1){%>
+  <li class="next">
+    <a href="/ticket/list?page=<%=paging.pages %>">尾页 &rarr;&rarr;</a>
+  </li>
+
+  <li class="next">
+    <a href="/ticket/list?page=<%=paging.page + 1%>">下一页 &rarr;</a>
+  </li>
+
+<%} %>
+</ul>
+</nav>
+

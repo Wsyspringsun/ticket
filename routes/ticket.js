@@ -11,21 +11,15 @@ var sql_print_sel = "select * from ticket t where t.ver=? and t.owner_id=? and t
 var sql_valid_sel = "select seat_id from ticket t where t.ver=? and t.seat_id in (?) ";
 var sql_disable_sel = "select seat_id from ticket t where t.ver=? ";
 
-function doPrint(mdl,req,res,next){
-	db.query(sql_print_sel,[mdl.ver,mdl.owner,mdl.sels],(err,result)=>{
-		if(err) return next(err,req,res,next);
-		var tickets = result;
-		res.render('ticket/print', {'tickets':tickets});
-	});
-}
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
 	var vers = res.locals.vers;
-	var verid = vers[0].id;
-	if(req.session.view.verid){
-		verid = req.session.view.verid;
-		req.session.view = {};
+	var verid ;
+	if(req.query.ver){
+		verid = req.query.ver;
+	}else{
+		verid = vers[0].id;
 	}
 	//search disable tickets
 	db.query(sql_disable_sel,[verid],(err,result)=>{
@@ -93,20 +87,14 @@ router.get('/list', (req, res, next) => {
 });
 router.post('/create', function(req, res, next) {
 	var mdl= req.body;
-	var isChangeVer = req.body.btnChange;
-	if(isChangeVer === '变更'){
-		req.session.view.verid = mdl.ver;
-		return res.redirect('/ticket/');
-	}
-
 	//存储门店为某个场次选择的座位选票
 	mdl.owner = req.session.loginer;
 	//获取选择的座位
 	var values = [];
 	var strSeats = mdl.sels;
 	if(!strSeats || ''==strSeats){
-		res.render('ticket/index',{err:'没有选任何座位'});
-		return;
+		res.error('没有选任何座位');
+		return res.redirect('back');
 	}
 	var seatArr = strSeats.split(',');
 	mdl.sels = seatArr;
@@ -141,7 +129,12 @@ router.post('/create', function(req, res, next) {
 					return next(error,req,res,next);
 				}
 				
-				doPrint(mdl,req,res,next);			
+
+				db.query(sql_print_sel,[mdl.ver,mdl.owner,mdl.sels],(err,result)=>{
+					if(err) return next(err,req,res,next);
+					var tickets = result;
+					res.render('ticket/print', {'tickets':tickets});
+				});
 			});
 		}
 

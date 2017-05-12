@@ -151,7 +151,7 @@ $(function() {
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "贵宾区_"+t+"_"+n;
+				return "贵宾区一层"+t+"排"+n+"号";
 			}
 		},
 		click: function () { //点击事件
@@ -186,11 +186,10 @@ $(function() {
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "贵宾区_"+t+"_"+n;
+				return "贵宾区一层"+t+"排"+n+"号";
 			}
 		},
 		click: function () { //点击事件
-			console.log(this.settings)
 			if (this.status() == 'available') { //可选座
 				$('<li>贵宾区'+(this.settings.row+1)+'排'+this.settings.label+'座</li>')
 					.attr('id', 'cart-item-'+this.settings.id)
@@ -233,7 +232,7 @@ $(function() {
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "主宾区_"+t+"_"+n;
+				return "主宾区一层"+t+"排"+n+'号';
 			}
 		},
 		click: function () { //点击事件
@@ -279,7 +278,7 @@ $(function() {
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "主宾区_"+t+"_"+n;
+				return "主宾区一层"+t+"排"+n+"号";
 			}
 		},
 		click: function () { //点击事件
@@ -331,7 +330,7 @@ $(function() {
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "嘉宾区_"+t+"_"+n;
+				return "嘉宾区一层"+t+"排"+n+"号";
 			}
 		},
 		click: function () { //点击事件
@@ -382,7 +381,7 @@ $(function() {
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "嘉宾区_"+t+"_"+n;
+				return "嘉宾区一层"+t+"排"+n+"号";
 			}
 		},
 		click: function () { //点击事件
@@ -424,7 +423,7 @@ $(function() {
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "嘉宾C区_"+t+"_"+n;
+				return "嘉宾C区一层"+t+"排"+n+"号";
 			}
 		},
 		click: function () { //点击事件
@@ -466,7 +465,7 @@ $(function() {
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "嘉宾C区_"+t+"_"+n;
+				return "嘉宾C区一层"+t+"排"+n+"号";
 			}
 		},
 		click: function () { //点击事件
@@ -512,7 +511,7 @@ $(function() {
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "普宾C区_"+t+"_"+n;
+				return "普宾C区二层"+t+"排"+n+"号";
 			}
 		},
 		click: function () { //点击事件
@@ -557,7 +556,7 @@ $(function() {
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "普宾C区_"+t+"_"+n;
+				return "普宾C区二层"+t+"排"+n+"号";
 			}
 		},
 		click: function () { //点击事件
@@ -598,7 +597,7 @@ $(function() {
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "贵宾A区_"+t+"_"+n;
+				return "贵宾A区一层"+t+"排"+n+"号";
 			}
 		},
 		click: function () { //点击事件
@@ -641,7 +640,7 @@ $(function() {
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "嘉宾A区_"+t+"_"+n;
+				return "嘉宾A区一层"+t+"排"+n+"号";
 			}
 		},
 		click: function () { //点击事件
@@ -689,7 +688,7 @@ $(function() {
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "普宾A区_"+t+"_"+n;
+				return "普宾A区二层"+t+"排"+n+"号";
 			}
 		},
 		click: function () { //点击事件
@@ -731,7 +730,7 @@ $(function() {
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "贵宾B区_"+t+"_"+n;
+				return "贵宾B区一层"+t+"排"+n+"号";
 			}
 		},
 		click: function () { //点击事件
@@ -774,7 +773,7 @@ var sc11 = $('#seat-map-jbb').seatCharts({
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "嘉宾B区_"+t+"_"+n;
+				return "嘉宾B区一层"+t+"排"+n+"号";
 			}
 		},
 		click: function () { //点击事件
@@ -824,7 +823,7 @@ var sc12 = $('#seat-map-pbb').seatCharts({
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "普宾B区_"+t+"_"+n;
+				return "普宾B区二层"+t+"排"+n+"号";
 			}
 		},
 		click: function () { //点击事件
@@ -905,7 +904,6 @@ for(var i=0;i<=$(".seatCharts-row").length;i++){
 		$cart.children('li').each(function(idx,item){
 			sels.push($(item).data('seatId'));
 		});
-console.log(sels);
 		if(!sels || sels.length<= 0){
 			alert('请选择座位 2');
 			e.preventDefault();

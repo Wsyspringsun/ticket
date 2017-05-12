@@ -22,7 +22,11 @@ router.post('/login', (req, res, next) => {
 		}
 
 		req.session.loginer = uname;
-		res.redirect('/ticket/');
+		if(uname == 'system'){
+			res.redirect('/system/');
+		} else {
+			res.redirect('/ticket/');
+		}
 	});
 });
 

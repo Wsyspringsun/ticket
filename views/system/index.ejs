@@ -1,0 +1,56 @@
+<%include ../head.ejs%>
+<div class='container'>
+	<div class='row'>
+		<div class='col-sm-3 col-md-2 sidebar'>
+			<div style="width:100%;" class="btn-group-vertical" role="group" aria-label="Vertical button group">
+				<button id="btnCleanCache" type="button" class="btn btn-danger">清除缓存</button>
+				<br/>
+
+				<div class="form-inline">
+				<select class="form-control" id="ver" name="ver" >
+				<%
+				vers.forEach((ver)=>{
+			//	[{id:1,title:'test'}].forEach((ver)=>{
+				%>
+					<option value="<%= ver.id%>"><%= ver.title%></option>
+				<%
+				});
+				%>
+				</select>
+				<button id="btnSeatStr" type="button" class="btn btn-info">座位输出</button>
+				</div>
+			</div>
+			
+			
+		</div>
+		<div class='col-sm-9 col-md-10 main'>
+			<div id="result"></div>
+		</div>
+	</div>
+</div>
+
+<script>
+$(function(){
+	$('#btnCleanCache').click(function(e){
+		if(confirm('确认清空缓存吗？')){
+			$.post('/system/refreshcache',function(result){
+				console.log(result);
+				$('#result').html(result);
+			});
+		}
+		e.preventDefault();
+	});
+	$('#btnSeatStr').click(function(e){
+		$.post('/system/seatlist',{
+			ver:$('#ver').val()
+		},function(result){
+			console.log(result);
+			$('#result').html(result);
+		});
+		e.preventDefault();
+
+	});
+});
+</script>
+</body>
+</html>

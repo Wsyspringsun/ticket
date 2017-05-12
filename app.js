@@ -1,5 +1,6 @@
 var express = require('express');
 var db = require('./lib/db.js');
+var login_init = require('./lib/login_init.js');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -10,6 +11,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var messages = require('./lib/messages');
 var ticket = require('./routes/ticket');
+var system = require('./routes/system');
 
 var app = express();
 
@@ -18,7 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.set('rootDir', __dirname);
 
-app.set('title','蓝九天药业连锁有限公司');
+app.set('title','蓝九天第二届企业文化节');
 app.cache = function(k,v){
 	this[k] = v;
 };
@@ -47,16 +49,7 @@ app.use(session({
 app.use(messages);
 
 app.use('/', routes);
-app.use(function(req,res,next){
-	var session = req.session;
-	var loginer = session.loginer;
-	if(!loginer){
-		res.redirect('/');
-		return;
-	}
-	//go on router
-	next();
-});
+app.use(login_init);
 
 app.use(function(req,res,next){
 	var vers;
@@ -64,14 +57,13 @@ app.use(function(req,res,next){
 		var sql_ver_sel = "select * from version t where t.del='0'  limit 20 ";
 		db.query(sql_ver_sel,(err,result)=>{
 			if(err) return next(err,req,res,next);
-console.log('from db');
+//console.log('from db');
 			vers = result;
 			if(!vers || vers.length<=0){
 				return res.end('<h1>暂时没有活动，无需选择座位</h1>');
 			}
 			req.app.cache.vers = vers;
 			res.locals.vers = vers;
-
 			next();
 		});
 
@@ -81,7 +73,13 @@ console.log('from db');
 		next();
 	}
 });
+//导航 
+app.use((req,res,next)=>{
+	var loginer = req.session.loginer;
+	next();
+});
 app.use('/ticket', ticket);
+app.use('/system', system);
 
 app.use(()=>{
 	db.getConnection((err,connection)=>{

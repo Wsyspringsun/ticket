@@ -156,7 +156,6 @@ router.post('/print', function(req, res, next) {
 		var tickets = result;
 		res.render('ticket/print', {'tickets':tickets});
 	});
-console.log(ret.sql);
 
 });
 

@@ -12,14 +12,14 @@
 		%>
 
 			<p>
-				<h2><%=settings.title%></h2>
-				<center>戏票入场券</center>
+				<center><%=settings.title%></center>
+				<center><small>戏曲专场入场券</small></center>
 				<h2><%= ticket.seat_id%></h2>
-				<h2>时间:<%= ticket.title %></h2>
-				<center>凭票入场 盖章有效</center>
-				<br/>
-				<center>咨询电话:0356-6993562</center>
-				<hr style="height:2px;border-top:solid 3px #000;"/> <hr/>
+				<h2><%= ticket.title.split(' ')[0]||'' %><br/>
+				<%= ticket.title.split(' ')[1]||'' %></h2>
+				<center><small>凭票入场 盖章有效</small></center>
+				<center><small>咨询电话:0356-6993562</small></center>
+				<hr style="height:2px;border-top:dashed 3px #000;"/> <hr/>
 			</p>
 			
 		<%

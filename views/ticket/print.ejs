@@ -1,27 +1,39 @@
 <%include ../head.ejs %>
-	<div>
-	<%
-		var i,j,len = tickets.length;
-		for(i=0;i<len;i++){
-			var ticket = tickets[i];
-	%>
-
-		<p>
-			<h2><%=settings.title%></h2>
-			<h2>戏票入场券</h2>
-			<h1><%= ticket.seat_id%></h1>
-			<h2>入场时间:<%= '6月7日 15:30'%></h2>
-			<h2>凭票入场:<%= '盖章有效'%></h2>
-			<br/>
-			<h2>咨询电话:<%= '0386-6993562'%></h2>
-			<hr style="height:2px;border-top:solid 3px #000;"/>
-			<hr/>
+	<div class="container">
+		<p class="noprint">
+			<button class="btn btn-primary btn-lg" id="btnPrint"> 打印 </button>
+			<hr style="height:2px;border-top:solid 3px #000;"/> <hr/>
 		</p>
-		
-	<%
-		}
-	%>
+		<div id="print" class="print">
+		<%
+			var i,j,len = tickets.length;
+			for(i=0;i<len;i++){
+				var ticket = tickets[i];
+		%>
 
+			<p>
+				<h2><%=settings.title%></h2>
+				<center>戏票入场券</center>
+				<h2><%= ticket.seat_id%></h2>
+				<h2>时间:<%= ticket.title %></h2>
+				<center>凭票入场 盖章有效</center>
+				<br/>
+				<center>咨询电话:0356-6993562</center>
+				<hr style="height:2px;border-top:solid 3px #000;"/> <hr/>
+			</p>
+			
+		<%
+			}
+		%>
+
+		</div>
 	</div>
 	</body>
+<script>
+$(function(){
+	$('#btnPrint').click(function(e){
+		window.print();
+	});
+});
+</script>
 </html>

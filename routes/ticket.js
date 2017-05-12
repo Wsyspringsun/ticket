@@ -7,7 +7,7 @@ var PAGE_SIZE = 10;
 var sql_ins = "insert into ticket( `seat_id`, `owner_id`, `ver`)values ?";
 var sql_sel = "select t.*,a.title from ticket t,version a where t.ver = a.id and a.del='0' and t.ver=? and t.owner_id=? order by a.id desc limit ?,?;  ";
 var sql_cnt_sel = "select count(1) cnt from ticket t,version a where t.ver = a.id and a.del='0' and t.ver=? and t.owner_id=?;";
-var sql_print_sel = "select * from ticket t where t.ver=? and t.owner_id=? and t.seat_id in (?) ";
+var sql_print_sel = "select t.*,a.title from ticket t,version a where t.ver = a.id and a.del='0' and t.ver=? and t.owner_id=? and t.seat_id in (?) ";
 var sql_valid_sel = "select seat_id from ticket t where t.ver=? and t.seat_id in (?) ";
 var sql_disable_sel = "select seat_id from ticket t where t.ver=? ";
 
@@ -130,7 +130,7 @@ router.post('/create', function(req, res, next) {
 				}
 				
 
-				db.query(sql_print_sel,[mdl.ver,mdl.owner,mdl.sels],(err,result)=>{
+				 db.query(sql_print_sel,[mdl.ver,mdl.owner,mdl.sels],(err,result)=>{
 					if(err) return next(err,req,res,next);
 					var tickets = result;
 					res.render('ticket/print', {'tickets':tickets});
@@ -150,7 +150,7 @@ router.post('/print', function(req, res, next) {
 		return res.redirect('back');
 	}
 	var owner = req.session.loginer;
-	var sql = 'select * from ticket t where t.id in (?) and t.owner_id=? ';
+	var sql = "select t.*,a.title from ticket t,version a where t.ver = a.id and a.del='0' and  t.id in (?) and t.owner_id=? ";
 	var ret = db.query(sql,[mdl.sels,owner],(err,result)=>{
 		if(err) return next(err,req,res,next);
 		var tickets = result;

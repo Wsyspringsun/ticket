@@ -1,0 +1,28 @@
+<%include ../head.ejs %>
+	<button class="btn btn-iprimary btn-lg" onclick="window.print();"> 打印 </button>
+	<div class="print">
+	<%
+		var i,j,len = tickets.length;
+		for(i=0;i<len;i++){
+			var ticket = tickets[i];
+	%>
+
+		<p>
+			<h2><%=settings.title%></h2>
+			<center>戏票入场券</center>
+			<h2><%= ticket.seat_id%></h3>
+			<h2>入场时间:<%= '6月7日 15:30'%></h2>
+			<center>凭票入场 盖章有效</center>
+			<br/>
+			<center>咨询电话:0356-6993562</center>
+			<hr style="height:2px;border-top:solid 3px #000;"/>
+			<hr/>
+		</p>
+		
+	<%
+		}
+	%>
+
+	</div>
+	</body>
+</html>

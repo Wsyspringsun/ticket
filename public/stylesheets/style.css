@@ -244,4 +244,7 @@ body {
 	text-align:center;
 }
 
-
+.print h1,.print h2,.print h3{
+	line-height:28px;
+	font-size:70;
+}

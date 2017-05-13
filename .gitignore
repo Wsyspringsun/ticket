@@ -3,3 +3,5 @@ public/javascripts/build/*
 public/javascripts/src/*
 test/*
 lib/db.js
+npm-debug.log
+*.swp

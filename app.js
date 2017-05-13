@@ -64,7 +64,6 @@ app.use(function(req,res,next){
 
 //共享数据缓存
 app.use(function(req,res,next){
-console.log(req.session.nav);
 	//导航菜单
 	res.locals.nav = req.session.nav;
 

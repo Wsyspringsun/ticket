@@ -7,6 +7,12 @@ router.get('/', function(req, res, next) {
 	res.render('index');
 });
 
+router.get('/logout', (req, res, next) => {
+	delete req.session.loginer;
+	delete req.session.nav;
+	res.redirect('/');
+});
+
 router.post('/login', (req, res, next) => {
 	var sql = 'select t.pwd from org t where t.id = ?';
 	var uname = req.body.uname,pwd = req.body.pwd;

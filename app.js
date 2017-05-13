@@ -1,6 +1,5 @@
 var express = require('express');
 var db = require('./lib/db.js');
-var login_init = require('./lib/login_init.js');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -49,9 +48,27 @@ app.use(session({
 app.use(messages);
 
 app.use('/', routes);
-app.use(login_init);
 
+//判断是否登录,如果没有登录返回登录页
 app.use(function(req,res,next){
+	var session = req.session;
+	var loginer = session.loginer;
+	if(!loginer){
+		res.redirect('/');
+		return;
+	}
+	//go on router 登录成功，继续处理
+	next();
+});
+
+
+//共享数据缓存
+app.use(function(req,res,next){
+console.log(req.session.nav);
+	//导航菜单
+	res.locals.nav = req.session.nav;
+
+	//场次列表
 	var vers;
 	if(!req.app.cache.vers){
 		var sql_ver_sel = "select * from version t where t.del='0'  limit 20 ";
@@ -72,11 +89,6 @@ app.use(function(req,res,next){
 		res.locals.vers = vers;
 		next();
 	}
-});
-//导航 
-app.use((req,res,next)=>{
-	var loginer = req.session.loginer;
-	next();
 });
 app.use('/ticket', ticket);
 app.use('/system', system);

@@ -22,11 +22,28 @@ router.post('/login', (req, res, next) => {
 		}
 
 		req.session.loginer = uname;
-		if(uname == 'system'){
-			res.redirect('/system/');
+		//初始化导航菜单
+		var index;
+		var navs =  [];
+
+		if(uname === 'system'){
+			navs = navs.concat([{
+				href:'/system/',
+				title:'管理'
+			}]);
+			index = '/system/';
 		} else {
-			res.redirect('/ticket/');
+			navs = navs.concat([{
+				href:'/ticket/',
+				title:'首页'
+			},{
+				href:'/ticket/list',
+				title:'我的'
+			}]);
+			index = '/ticket/';
 		}
+		req.session.nav = navs;
+		res.redirect(index);
 	});
 });
 

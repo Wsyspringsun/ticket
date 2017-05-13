@@ -7,7 +7,6 @@
 				<select class="form-control" name="ver" >
 				<%
 				vers.forEach((ver)=>{
-			//	[{id:1,title:'test'}].forEach((ver)=>{
 				%>
 					<option value="<%= ver.id%>" <%= ver.id==verid?'selected=selected':null %> ><%= ver.title%></option>
 				<%

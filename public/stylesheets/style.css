@@ -271,6 +271,11 @@ body {
 	body{
 		padding:0;
 	}
+	.print{
+		text-align:center;
+		width:220px;
+		margin:0 auto;
+	}
 	nav,aside{
 		display:none;
 	}

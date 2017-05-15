@@ -259,6 +259,11 @@ body {
 
 
 @media print{
+	.noprint{
+		display:none;
+		height:0;
+	} 
+
 	*{
 		padding:0;
 		margin: 0;
@@ -269,23 +274,7 @@ body {
 	nav,aside{
 		display:none;
 	}
-	.noprint{
-		display:none;
-		height:0;
-	} 
-	.print{
-	}
-	.print p{
-	}
-
-	.print h1{
-	}
-	.print h2{
-	}
-	.print h3{
-	}
 	@page{
-		size:5.6cm 5.5cm;
 		margin:0 0;
 		padding:0 0;
 	}

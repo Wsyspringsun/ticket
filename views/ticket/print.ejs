@@ -1,32 +1,30 @@
 <%include ../head.ejs %>
-	<div class="container">
-		<p class="noprint">
-			<button class="btn btn-primary btn-lg" id="btnPrint"> 打印 </button>
-			<hr style="height:2px;border-top:solid 3px #000;"/> <hr/>
-		</p>
-		<div id="print" class="print">
+	<div class="container print">
+		<div class="noprint">
+			<button style='margin-left:12px;' class="btn btn-primary btn-lg" id="btnPrint"> 打印 </button>
+		</div>
+
+
 		<%
 			var i,j,len = tickets.length;
 			for(i=0;i<len;i++){
 				var ticket = tickets[i];
 		%>
 
-			<p>
-				<center><%=settings.title%></center>
-				<center><small>戏曲专场入场券</small></center>
-				<h2><%= ticket.seat_id%></h2>
-				<h2><%= ticket.title.split(' ')[0]||'' %><br/>
-				<%= ticket.title.split(' ')[1]||'' %></h2>
-				<center><small>凭票入场 盖章有效</small></center>
-				<center><small>咨询电话:0356-6993562</small></center>
-				<hr style="height:2px;border-top:dashed 3px #000;"/> <hr/>
+			<p style="width:100%;font-size:8pt;">
+				<h2><%=settings.title%></h2>
+				<h3>戏曲专场入场券</h3>
+				<h1><%= ticket.seat_id%></h1>
+				<h1><%= ticket.title.split(' ')[0]||'' %><%= ticket.title.split(' ')[1]||'' %></h1>
+				<h3>凭票入场 盖章有效</h3>
+				<h3>咨询电话:0356-6993562</h3>
+				<hr style="border-bottom:dashed 2px;"/>
 			</p>
 			
 		<%
 			}
 		%>
 
-		</div>
 	</div>
 	</body>
 <script>

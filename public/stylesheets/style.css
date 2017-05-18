@@ -169,10 +169,11 @@ body {
     top: 51px;
     bottom: 0;
     left: 0;
+    width:240px;
     z-index: 1000;
     display: block;
     padding: 20px;
-    overflow-x: hidden;
+    overflow-x: auto;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: #f5f5f5;
     border-right: 1px solid #eee;
@@ -206,9 +207,9 @@ body {
   .main {
     position: fixed;
     top: 51px;
-    left: 270px;
+    left: 245px;
     bottom: 0;
-    right: 0;
+    right: 5px;
     z-index: 100;
     display: block;
     overflow-x: auto;
@@ -244,7 +245,7 @@ body {
 	text-align:center;
 }
 
-.print h1{
+/*.print h1{
 	font-size:20px;
 	line-height:20px;
 }
@@ -255,34 +256,34 @@ body {
 .print h3{
 	font-size:8px;
 	line-height:14px;
+}*/
+.print p{
+  font-family: "黑体";
+  text-align: center;
+  font-size:12px;
+  line-height:15px;
 }
-
-
+.print p b{font-size: 14px;font-family: "黑体";}
 @media print{
+	.navbar {
+    display: none;
+  }
 	.noprint{
-		display:none;
-		height:0;
-	} 
-
-	*{
-		padding:0;
-		margin: 0;
+		diaplay:none;
+		visibility:hidden;
 	}
-	body{
-		padding:0;
-	}
-	.print{
-		text-align:center;
-		width:220px;
-		margin:0 auto;
-	}
-	nav,aside{
-		display:none;
-	}
-	@page{
-		margin:0 0;
-		padding:0 0;
-	}
-
-
+  .print p{
+  margin-bottom: 5px;
+  padding: 0;
+  }
+	/*.print h1{
+  font-size:14px;
+  line-height:20px;
+  }
+	.print h2,.print h3,.print h4{
+  font-size:12px;
+  line-height:20px;
+  }*/
 }
+
+

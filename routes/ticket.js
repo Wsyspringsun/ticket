@@ -154,6 +154,7 @@ router.post('/print', function(req, res, next) {
 	var ret = db.query(sql,[mdl.sels,owner],(err,result)=>{
 		if(err) return next(err,req,res,next);
 		var tickets = result;
+
 		res.render('ticket/print', {'tickets':tickets});
 	});
 

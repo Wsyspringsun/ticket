@@ -1,22 +1,23 @@
 <%include ../head.ejs %>
+	<div class="container print">
 		<div class="noprint">
 			<button style='margin-left:12px;' class="btn btn-primary btn-lg" id="btnPrint"> 打印 </button>
 		</div>
-
-	<div class="print">
 		<%
 			var i,j,len = tickets.length;
 			for(i=0;i<len;i++){
 				var ticket = tickets[i];
 		%>
-
 			<p>
-				<h2><%=settings.title%></h2>
-				<h3>戏曲专场入场券</h3>
-				<h1><%= ticket.seat_id%></h1>
-				<h1><%= ticket.title.split(' ')[0]||'' %><%= ticket.title.split(' ')[1]||'' %></h1>
-				<h3>凭票入场 盖章有效</h3>
-				<h3>咨询电话:0356-6993562</h3>
+				<p><%=settings.title.substring(0,3)%></p>
+				<p><%=settings.title.substring(3)%></p>
+				<p>戏曲专场入场券</p>
+				<p><b><%= ticket.seat_id%></b></p>
+				<p><b><%= ticket.title.split(' ')[0]||'' %></b></p>
+				<p><b><%= ticket.title.split(' ')[1]||'' %></b></p>
+				<p>凭票入场</p>
+				<p>盖章有效</p>
+				<p>咨询电话:0356-6993562</p>
 				<hr style="padding:0;border-bottom:dashed 2px;"/>
 			</p>
 			

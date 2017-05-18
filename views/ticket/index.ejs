@@ -2,7 +2,7 @@
 <form  id='frm'>
 <div class='container'>
 	<div class='row'>
-		<div class='col-sm-3 col-md-2 sidebar'>
+		<div class='sidebar'>
 			<div class="form-inline">
 				<select class="form-control" name="ver" >
 				<%
@@ -47,37 +47,29 @@
 		
 		</div><!-- end sidebar-->
 
-		<div class='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main set-map'>
+		<div class='main set-map'>
 
 <div id="main" class="area">
 	<h3>中心区域</h3>
 	<div id="area_VIP">
 		<ul id="seat-map-gba"></ul>
-		<ul class="passway">
-			<li style="">贵宾区</li>
-			<li style="">主宾区</li>
-			<li style="">嘉宾区</li>
-		</ul>
+		<ul class="passway passway-l">贵<br>宾<br>A<br>区</ul>
 		<ul id="seat-map-zxl">
 			<li id="seat-map-gbl"></li>
 			<li id="seat-map-zbl"></li>
 			<li id="seat-map-jbl"></li>
 		</ul>
 		<ul class="passway">
-			<li>贵宾区</li>
-			<li>主宾区</li>
-			<li>嘉宾区</li>
+			<li>贵<br>宾<br>C<br>区</li>
+			<li>主<br>宾<br>区</li>
+			<li>嘉<br>宾<br>区</li>
 		</ul>
 		<ul id="seat-map-zxr">
 			<li id="seat-map-gbr"></li>
 			<li id="seat-map-zbr"></li>
 			<li id="seat-map-jbr"></li>
 		</ul>
-		<ul class="passway">
-			<li style="padding:4px 0 5px 0;">贵宾区</li>
-			<li style="padding:130px 0;">主宾区</li>
-			<li style="padding:40px 0 45px 0;">嘉宾区</li>
-		</ul>
+		<ul class="passway passway-r">贵<br>宾<br>B<br>区</ul>
 		<ul id="seat-map-gbb"></ul>
 		<div style="clear:both;"></div>
 	</div>
@@ -137,7 +129,7 @@ $(function() {
 	var $cart = $('#selected-seats'), //座位区
 	$counter = $('#counter'), //票数
 	$total = $('#total'); //总计金额
-//贵宾区
+//贵宾C区
 	var sVip1 = $('#seat-map-gbl').seatCharts({
 		map: [ 
 		'aaaaaaaaaaaaaaaaaaaa',
@@ -150,7 +142,7 @@ $(function() {
 				return column;
 			},
 			getId : function(e,t,n) {
-				return "贵宾区一层"+t+"排"+n+"号";
+				return "贵宾C区一层"+t+"排"+n+"号";
 			}
 		},
 		click: function () { //点击事件
@@ -719,9 +711,7 @@ $(function() {
 		'aaaaaaaa',
 		'aaaaaaaa',
 		'aaaaaaaa',
-		'aaaaaaaa',
-		'aaaaaaaa',
-		'aaaaaaaa'
+		'aaaaa___'
 		],
 		naming : {
 			top : false,

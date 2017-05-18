@@ -245,45 +245,25 @@ body {
 	text-align:center;
 }
 
-/*.print h1{
-	font-size:20px;
-	line-height:20px;
-}
-.print h2{
-	font-size:14px;
-	line-height:20px;
-}
-.print h3{
-	font-size:8px;
-	line-height:14px;
-}*/
+.print>div{margin-top: 20px;}
 .print p{
+  width:100%;
   font-family: "黑体";
   text-align: center;
-  font-size:12px;
-  line-height:15px;
+  font-size:10px;
+  line-height: 15px;
+  margin-bottom: 5px;
 }
 .print p b{font-size: 14px;font-family: "黑体";}
+.print p span{font-size: 12px;font-family: "黑体";}
 @media print{
-	.navbar {
+	.container,.navbar,nav,aside {
     display: none;
   }
 	.noprint{
 		diaplay:none;
 		visibility:hidden;
 	}
-  .print p{
-  margin-bottom: 5px;
-  padding: 0;
-  }
-	/*.print h1{
-  font-size:14px;
-  line-height:20px;
-  }
-	.print h2,.print h3,.print h4{
-  font-size:12px;
-  line-height:20px;
-  }*/
 }
 
 

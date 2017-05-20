@@ -19,7 +19,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.set('rootDir', __dirname);
 
-app.set('title','蓝九天第二届企业文化节');
+app.set('title','蓝九天大药房第二届企业文化节');
 app.cache = function(k,v){
 	this[k] = v;
 };

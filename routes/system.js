@@ -18,7 +18,7 @@ router.post('/seatlist', (req, res, next) => {
 		if(err) return next(err,req,res,next);
 		var seatStr = results.map((item)=>{
 			return item.seat_id;
-		}).join(';');
+		}).join('\r\n');
 		res.end(seatStr);
 	});
 });

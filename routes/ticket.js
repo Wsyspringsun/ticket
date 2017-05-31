@@ -1,4 +1,7 @@
 var express = require('express');
+var path = require('path');
+var fs = require('fs');
+var Canvas = require('canvas');
 var router = express.Router();
 var db = require('../lib/db.js');
 var array = require('array');
@@ -155,7 +158,25 @@ router.post('/print', function(req, res, next) {
 		if(err) return next(err,req,res,next);
 		var tickets = result;
 
-		res.render('ticket/print', {'tickets':tickets});
+		var printFmt = JSON.parse(fs.readFileSync(path.join(__dirname,'print.json'), 'utf8'));
+		var canvas = new Canvas(printFmt.w,printFmt.h , 'pdf');
+		var ctx = canvas.getContext('2d');
+		result.forEach((ticket,i)=>{
+			ctx.font = printFmt.font1;
+			ctx.fillText(req.app.get('title').substring(0,6), printFmt.offsets[0], 20);
+			ctx.fillText(req.app.get('title').substring(6), printFmt.offsets[5], 40);
+			ctx.font = printFmt.font2;
+			ctx.fillText(ticket.seat_id,printFmt.offsets[1] , 60);
+			ctx.fillText(ticket.title,printFmt.offsets[2] , 80);
+			ctx.font = printFmt.font3;
+			ctx.fillText('凭票入场 盖章有效',printFmt.offsets[3] , 100);
+			ctx.fillText('咨询电话:0356-6993562',printFmt.offsets[4] , 120);
+			ctx.addPage();
+		});
+		//res.writeHead(200,{'Content0Type':'application/pdf'});
+		res.end(canvas.toBuffer());
+		//ctx.pipe(res);
+//		res.render('ticket/print', {'tickets':tickets});
 	});
 
 });

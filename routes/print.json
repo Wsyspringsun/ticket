@@ -1,8 +1,11 @@
 {
     "w":230,
-    "h":240,
-    "font1":"14px Helvetica",
-    "font2":"16px Helvetica",
-    "font3":"12px Helvetica",
-    "offsets":[70,32,32,60,48,56]
+    "h":720,
+    "font1":20,
+    "font2":24,
+    "font3":16,
+    "font4":20,
+    "fam":"Helvetica",
+    "lineH":25,
+    "lines":[2,3,5,6,8,9,11,12,14]
 }

@@ -14,7 +14,19 @@ var sql_print_sel = "select t.*,a.title from ticket t,version a where t.ver = a.
 var sql_valid_sel = "select seat_id from ticket t where t.ver=? and t.seat_id in (?) ";
 var sql_disable_sel = "select seat_id from ticket t where t.ver=? ";
 
+var printFmt = JSON.parse(fs.readFileSync(path.join(__dirname,'print.json'), 'utf8'));
+var fam = printFmt.fam1;
+var lines = printFmt.lines;
 
+function getOffset(w,pSize,cnt){
+	return (w-pSize*cnt)/2;
+}
+function getFont(size,fam){
+	return size+'px '+fam+'';
+}
+function getLine(i){
+	return lines[i]*printFmt.lineH;
+}
 /* GET home page. */
 router.get('/', (req, res, next) => {
 	var vers = res.locals.vers;
@@ -158,19 +170,35 @@ router.post('/print', function(req, res, next) {
 		if(err) return next(err,req,res,next);
 		var tickets = result;
 
-		var printFmt = JSON.parse(fs.readFileSync(path.join(__dirname,'print.json'), 'utf8'));
 		var canvas = new Canvas(printFmt.w,printFmt.h , 'pdf');
 		var ctx = canvas.getContext('2d');
 		result.forEach((ticket,i)=>{
-			ctx.font = printFmt.font1;
-			ctx.fillText(req.app.get('title').substring(0,6), printFmt.offsets[0], 20);
-			ctx.fillText(req.app.get('title').substring(6), printFmt.offsets[5], 40);
-			ctx.font = printFmt.font2;
-			ctx.fillText(ticket.seat_id,printFmt.offsets[1] , 60);
-			ctx.fillText(ticket.title,printFmt.offsets[2] , 80);
-			ctx.font = printFmt.font3;
-			ctx.fillText('凭票入场 盖章有效',printFmt.offsets[3] , 100);
-			ctx.fillText('咨询电话:0356-6993562',printFmt.offsets[4] , 120);
+			//标题
+			ctx.font = getFont(printFmt.font1,fam) ;
+			ctx.fillText(req.app.get('title').substring(0,6), getOffset(printFmt.w,printFmt.font1,6), getLine(0));
+			ctx.fillText(req.app.get('title').substring(6), getOffset(printFmt.w,printFmt.font1,8), getLine(1));
+
+			//座位
+			ctx.font = getFont(printFmt.font2,fam) ;
+			var seat_id = ticket.seat_id;
+			var spl = seat_id.indexOf('区');
+			ctx.fillText(seat_id.substring(0,spl+1), getOffset(printFmt.w,printFmt.font2,spl+1), getLine(2));
+			ctx.fillText(seat_id.substring(spl+1), getOffset(printFmt.w,printFmt.font2,(seat_id.length-spl-2)), getLine(3));
+
+			//日期
+			ctx.fillText(ticket.title.split(' ')[0], getOffset(printFmt.w,printFmt.font2,6), getLine(4));
+			ctx.fillText(ticket.title.split(' ')[1], getOffset(printFmt.w,printFmt.font2,3), getLine(5));
+
+			
+			//尾部
+			ctx.font = getFont(printFmt.font3,fam) ;
+			ctx.fillText('凭票入场', getOffset(printFmt.w,printFmt.font3,4), getLine(6));
+			ctx.fillText('盖章有效', getOffset(printFmt.w,printFmt.font3,4), getLine(7));
+			ctx.fillText('咨询电话:0356-6993562', getOffset(printFmt.w,printFmt.font3,11), getLine(8));
+			ctx.moveTo(0,printFmt.h-5);
+			ctx.lineTo(printFmt.w,printFmt.h-5);
+			ctx.stroke();
+
 			ctx.addPage();
 		});
 		//res.writeHead(200,{'Content0Type':'application/pdf'});

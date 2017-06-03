@@ -19,7 +19,7 @@ var fam = printFmt.fam1;
 var lines = printFmt.lines;
 
 function getOffset(w,pSize,cnt){
-	return (w-pSize*cnt)/2;
+	return (w-pSize*cnt)/2-10;
 }
 function getFont(size,fam){
 	return size+'px '+fam+'';

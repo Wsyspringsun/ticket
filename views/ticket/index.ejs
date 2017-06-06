@@ -28,7 +28,8 @@
 				<p>座位：</p>
 				<ul id="selected-seats"></ul>
 				<p><span></span></p>				
-				<button id="btnSure" class="btn btn-success">确定</button>	
+				<button id="btnSure" class="btn btn-success">PDF文档</button>	
+				<button id="btnSure2" name="print2" value="true" class="btn btn-success">打印</button>	
 				<input type='hidden' name='sels' ></input>
 				<div class="seatCharts-legend">
 					<ul class="seatCharts-legendList">
@@ -905,6 +906,24 @@ for(var i=0;i<=$(".seatCharts-row").length;i++){
 			action:'/ticket/create'
 		});
 	});
+	$('#btnSure2').click(function(e){
+		var sels = [];
+		$cart.children('li').each(function(idx,item){
+			sels.push($(item).data('seatId'));
+		});
+		if(!sels || sels.length<= 0){
+			alert('请选择座位 2');
+			e.preventDefault();
+			return false;
+		}
+		$('input[name="sels"]').val(sels);
+
+		$('#frm').attr({
+			method:"post" ,
+			action:'/ticket/create'
+		});
+	});
+
 
 	
 

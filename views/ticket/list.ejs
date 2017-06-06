@@ -21,6 +21,7 @@
 					</select></label>
 					<input id="btnlist"  class="btn btn-default" type="submit" name="btnChange" value="查询" />
 
+				<input type="submit" id="btnPDF" name="btnPDF"  class="btn btn-success" value="PDF文档"/>
 				<input type="submit" id="btnprint" class="btn btn-success" value="打印"/>
 			</div>
 			<%include ../paging.ejs %>
@@ -74,6 +75,13 @@ $(function(){
 			action : '/ticket/print'
 		});
 	});
+	$('#btnPDF').click(function(e){
+		$('#frm').attr({
+			method : 'post',
+			action : '/ticket/print'
+		});
+	});
+
 });
 </script>
 

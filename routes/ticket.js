@@ -182,11 +182,13 @@ router.post('/create', function(req, res, next) {
 				 db.query(sql_print_sel,[mdl.ver,mdl.owner,mdl.sels],(err,result)=>{
 					if(err) return next(err,req,res,next);
 					var tickets = result;
-					doPrint(req,res,result);
-					//res.render('ticket/print', {'tickets':tickets});
+					var printStyle = req.body.print2;
+					if(printStyle){
+						res.render('ticket/print', {'tickets':tickets});
 
-					
-
+					}else{
+						doPrint(req,res,result);
+					}
 				});
 			});
 		}
@@ -207,8 +209,12 @@ router.post('/print', function(req, res, next) {
 	var ret = db.query(sql,[mdl.sels,owner],(err,result)=>{
 		if(err) return next(err,req,res,next);
 		var tickets = result;
-
-		doPrint(req,res,result);
+		var isPdf = req.body.btnPDF;
+		if(isPdf){
+			doPrint(req,res,result);
+		}else{
+			res.render('ticket/print', {'tickets':tickets});
+		}
 
 	});
 

@@ -1,6 +1,13 @@
-如何全局定义错误级别:wa
 
-todo 登录
+insert into `version`(title)values('2017年6月1日 15:00');
+insert into `version`(title)values('2017年6月14日 15:00');
+insert into `version`(title)values('2017年6月14日 20:00');
+insert into `version`(title)values('2017年6月15日 15:00');
+insert into `version`(title)values('2017年6月15日 20:00');
+insert into `version`(title)values('2017年6月16日 15:00');
+insert into `version`(title)values('2017年6月16日 20:00');
+insert into `version`(title)values('2017年6月17日 15:00');
+insert into `version`(title)values('2017年6月17日 20:00');
 
 
 
